@@ -1154,6 +1154,29 @@
   /* tech section has slightly smaller padding */
   #tech { padding:80px 5%; }
 
+  /* ─── SECTION GRIDS ─── */
+  .arch-grid {
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+    max-width:960px;
+    margin:0 auto;
+  }
+
+  .roles-grid {
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+    max-width:960px;
+    margin:0 auto;
+  }
+
+  .tech-grid {
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:12px;
+  }
+
   /* ─── ARCHITECTURE / ROLES HOVER CARDS ─── */
   .arch-card {
     background:var(--surface);
@@ -1268,9 +1291,9 @@
     #how-it-works > div:last-child::before { display: none; }
 
     /* Architecture, roles, tech */
-    #architecture > div:last-child { grid-template-columns: 1fr 1fr; }
-    #roles > div:last-child { grid-template-columns: 1fr 1fr; }
-    #tech .reveal > div { grid-template-columns: 1fr; gap: 32px; }
+    .arch-grid { grid-template-columns: 1fr 1fr; }
+    .roles-grid { grid-template-columns: 1fr 1fr; }
+    .tech-grid { grid-template-columns: 1fr; gap: 32px; }
   }
 
   /* Mobile */
@@ -1306,10 +1329,10 @@
     #how-it-works > div:last-child > div { width: 100%; max-width: 280px; flex-direction: row; text-align: left; align-items: center; gap: 16px; }
     #how-it-works > div:last-child > div > div:nth-child(1) { flex-shrink: 0; }
 
-    #architecture > div:last-child { grid-template-columns: 1fr; overflow-x: auto; }
-    #roles > div:last-child { grid-template-columns: 1fr; }
+    .arch-grid { grid-template-columns: 1fr; }
+    .roles-grid { grid-template-columns: 1fr; }
     #tech .reveal { padding: 28px 20px; }
-    #tech .reveal > div:last-child { grid-template-columns: 1fr; }
+    .tech-grid { grid-template-columns: 1fr; }
 
     .section-title { font-size: clamp(1.5rem, 5vw, 2rem); }
 
@@ -1677,7 +1700,7 @@
     <h2 class="section-title" data-tr="3 Katmanlı Sistem Mimarisi" data-en="3-Layer System Architecture">3 Katmanlı Sistem Mimarisi</h2>
   </div>
 
-  <div class="reveal" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;max-width:960px;margin:0 auto;">
+  <div class="reveal arch-grid">
     <!-- Mobile -->
     <div class="arch-card">
       <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#00C8FF,#0050ff);"></div>
@@ -1732,7 +1755,7 @@
     <p class="section-sub" style="margin:0 auto;" data-tr="Her kullanıcı tipine özel ekran ve yetkiler." data-en="Dedicated screens and permissions for each user type.">Her kullanıcı tipine özel ekran ve yetkiler.</p>
   </div>
 
-  <div class="reveal" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;max-width:960px;margin:0 auto;">
+  <div class="reveal roles-grid">
 
     <!-- Admin -->
     <div class="role-card-red">
@@ -1821,7 +1844,7 @@
       <h2 style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;line-height:1.2;margin-bottom:12px;" data-tr="Teknik Altyapı" data-en="Technical Infrastructure">Teknik Altyapı</h2>
       <p style="color:var(--muted);font-size:.88rem;line-height:1.7;" data-tr="Modern ve ölçeklenebilir teknoloji yığını." data-en="Modern and scalable technology stack.">Modern ve ölçeklenebilir teknoloji yığını.</p>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <div class="tech-grid">
       <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:rgba(0,200,255,0.04);border:1px solid rgba(0,200,255,0.1);border-radius:10px;">
         <span style="font-size:1.1rem;">⚙️</span>
         <div>
