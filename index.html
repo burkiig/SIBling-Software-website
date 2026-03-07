@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>SIBling Software – Yenilikçi Yazılım Çözümleri</title>
 <meta name="description" content="SIBling Software; web, mobil, siber güvenlik ve otomasyon alanlarında yenilikçi yazılım çözümleri üretir. Fikirlerinizi ürüne dönüştürüyoruz.">
 <meta name="keywords" content="yazılım, mobil uygulama, web geliştirme, siber güvenlik, otomasyon, React Native, SIBling Software">
@@ -68,8 +68,8 @@
     position:fixed;
     top:0; left:0; right:0;
     z-index:100;
-    padding:0 5%;
-    height:88px;
+    padding:env(safe-area-inset-top) 5% 0;
+    height:calc(88px + env(safe-area-inset-top));
     display:flex;
     align-items:center;
     justify-content:flex-start;
@@ -182,7 +182,7 @@
     min-height:100vh;
     display:flex;
     align-items:center;
-    padding:136px 5% 80px;
+    padding:calc(136px + env(safe-area-inset-top)) 5% 80px;
     gap:60px;
   }
 
@@ -1257,13 +1257,14 @@
   #mobile-menu-btn {
     display:none;
     background:transparent;
-    border:1px solid rgba(255,255,255,0.15);
+    border:1px solid rgba(255,255,255,0.18);
     color:var(--text);
-    padding:6px 9px;
-    border-radius:6px;
+    padding:5px 8px;
+    border-radius:5px;
     cursor:pointer;
-    font-size:1rem;
+    font-size:.95rem;
     line-height:1;
+    flex-shrink:0;
   }
 
   /* scrollbar */
@@ -1312,7 +1313,7 @@
 
   /* Mobile */
   @media (max-width: 768px) {
-    header { padding: 0 4%; height: 60px; }
+    header { padding: env(safe-area-inset-top) 4% 0; height: calc(60px + env(safe-area-inset-top)); }
     nav { display: none; }
     .header-right { gap: 10px; }
     .btn-cta { padding: 7px 14px; font-size: .8rem; }
