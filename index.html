@@ -76,19 +76,29 @@
     align-items:center;
     justify-content:flex-start;
     gap:0;
-    transition: background .3s, backdrop-filter .3s, border-color .3s, box-shadow .3s;
+    background: rgba(6,12,20,0.7);
+    transition: background .3s, backdrop-filter .3s, border-color .3s;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
-    /* iOS Safari: URL bar ile header arasındaki boşluğu kapat */
-    box-shadow: 0 -200px 0 200px rgba(6,12,20,0.97);
+  }
+
+  /* iOS Dynamic Island: URL bar küçülürken açılan gap'i kapat */
+  header::before {
+    content: '';
+    position: absolute;
+    top: -120px;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: inherit;
+    pointer-events: none;
   }
 
   header.scrolled {
-    background: rgba(6,12,20,0.95);
+    background: rgba(6,12,20,0.97);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
-    box-shadow: 0 -200px 0 200px rgba(6,12,20,0.97);
   }
 
   .logo {
