@@ -1177,6 +1177,17 @@
     gap:12px;
   }
 
+  .tech-inner {
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:48px;
+    display:grid;
+    grid-template-columns:1fr 2fr;
+    gap:60px;
+    align-items:center;
+  }
+
   /* ─── ARCHITECTURE / ROLES HOVER CARDS ─── */
   .arch-card {
     background:var(--surface);
@@ -1294,6 +1305,7 @@
     .arch-grid { grid-template-columns: 1fr 1fr; }
     .roles-grid { grid-template-columns: 1fr 1fr; }
     .tech-grid { grid-template-columns: 1fr; gap: 32px; }
+    .tech-inner { grid-template-columns: 1fr; gap: 32px; padding: 36px; }
   }
 
   /* Mobile */
@@ -1331,7 +1343,11 @@
 
     .arch-grid { grid-template-columns: 1fr; }
     .roles-grid { grid-template-columns: 1fr; }
-    #tech .reveal { padding: 28px 20px; }
+    .tech-inner {
+      grid-template-columns: 1fr;
+      padding: 28px 20px;
+      gap: 28px;
+    }
     .tech-grid { grid-template-columns: 1fr; }
 
     .section-title { font-size: clamp(1.5rem, 5vw, 2rem); }
@@ -1838,7 +1854,7 @@
 
 <!-- ─── TECH STACK ─── -->
 <section id="tech">
-  <div class="reveal" style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:48px;display:grid;grid-template-columns:1fr 2fr;gap:60px;align-items:center;">
+  <div class="reveal tech-inner">
     <div>
       <div class="section-tag" data-tr="Teknoloji" data-en="Tech Stack">Teknoloji</div>
       <h2 style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;line-height:1.2;margin-bottom:12px;" data-tr="Teknik Altyapı" data-en="Technical Infrastructure">Teknik Altyapı</h2>
