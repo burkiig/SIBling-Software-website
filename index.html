@@ -34,13 +34,15 @@
 
   * { margin:0; padding:0; box-sizing:border-box; }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
 
   body {
     background: var(--bg);
     color: var(--text);
     font-family: 'IBM Plex Sans', sans-serif;
-    overflow-x: hidden;
   }
 
   /* ─── NOISE OVERLAY ─── */
@@ -67,7 +69,7 @@
   header {
     position:fixed;
     top:0; left:0; right:0;
-    z-index:100;
+    z-index:1000;
     padding:env(safe-area-inset-top) 5% 0;
     height:calc(88px + env(safe-area-inset-top));
     display:flex;
@@ -75,6 +77,8 @@
     justify-content:flex-start;
     gap:0;
     transition: background .3s, backdrop-filter .3s, border-color .3s;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
   }
 
   header.scrolled {
@@ -1299,9 +1303,9 @@
     nav { gap: 18px; }
     nav a { font-size: .82rem; }
 
-    /* How it works - wrap on tablet */
-    #how-it-works > div:last-child { flex-wrap: wrap; gap: 20px; }
-    #how-it-works > div:last-child > div { flex: 1 1 calc(33% - 20px); min-width: 140px; }
+    /* How it works – tablet: 3'lü wrap */
+    #how-it-works > div:last-child { flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+    #how-it-works > div:last-child > div { flex: 1 1 calc(33% - 20px); min-width: 140px; flex-direction: column; align-items: center; text-align: center; }
     #how-it-works > div:last-child::before { display: none; }
 
     /* Architecture, roles, tech */
@@ -1340,9 +1344,53 @@
     .project-featured { border-radius: 16px; }
     .pf-left { padding: 32px 24px; }
 
-    #how-it-works > div:last-child { flex-direction: column; align-items: center; gap: 24px; }
-    #how-it-works > div:last-child > div { width: 100%; max-width: 280px; flex-direction: row; text-align: left; align-items: center; gap: 16px; }
-    #how-it-works > div:last-child > div > div:nth-child(1) { flex-shrink: 0; }
+    /* How it works – dikey timeline */
+    #how-it-works > div:last-child {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 0 !important;
+      padding-left: 12px;
+      position: relative;
+    }
+
+    /* Yatay çizgiyi gizle */
+    #how-it-works > div:last-child > div:first-child {
+      display: none !important;
+    }
+
+    /* Dikey bağlantı çizgisi */
+    #how-it-works > div:last-child::before {
+      content: '';
+      position: absolute;
+      left: 41px;
+      top: 44px;
+      bottom: 44px;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(0,200,255,0.8), rgba(0,200,255,0.15));
+      display: block;
+      z-index: 0;
+    }
+
+    /* Her adım yatay (ikon sol – metin sağ) */
+    #how-it-works > div:last-child > div {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      text-align: left !important;
+      gap: 18px;
+      width: 100%;
+      padding: 14px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* İkon sabit boyut */
+    #how-it-works > div:last-child > div > div:first-child {
+      width: 56px !important;
+      height: 56px !important;
+      font-size: 1.3rem !important;
+      flex-shrink: 0;
+    }
 
     .arch-grid { grid-template-columns: 1fr; }
     .roles-grid { grid-template-columns: 1fr; }
