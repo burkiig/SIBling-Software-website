@@ -1143,6 +1143,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    align-items: stretch;
   }
   @media (max-width: 900px) { .coming-grid { grid-template-columns: 1fr; } }
 
@@ -1150,15 +1151,28 @@
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 18px;
-    padding: 36px 32px;
+    padding: 32px 28px;
     position: relative;
     overflow: hidden;
     transition: all .3s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .coming-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    height: 100%;
   }
   .coming-card:hover {
     transform: translateY(-6px);
     border-color: rgba(165,180,252,0.3);
     box-shadow: 0 0 40px rgba(165,180,252,0.10);
+  }
+  .coming-link:focus-visible .coming-card {
+    outline: 2px solid var(--accent2);
+    outline-offset: 3px;
   }
   .coming-card::before {
     content: '';
@@ -1180,7 +1194,7 @@
     z-index: 1;
   }
   .coming-title {
-    font-size: var(--fs-xl);
+    font-size: clamp(15px, 1.4vw, 18px);
     font-weight: var(--fw-semibold);
     color: #fff;
     margin-bottom: 10px;
@@ -1198,6 +1212,7 @@
     margin-bottom: 18px;
     position: relative;
     z-index: 1;
+    flex: 1;
   }
   .coming-meta {
     display: inline-flex;
@@ -1464,7 +1479,7 @@
 
   <div class="hero-pill liquid-glass au au-0">
     <span class="pill-new" data-tr="YENİ" data-en="NEW">YENİ</span>
-    <span class="pill-text" data-tr="Smart Attendance System v1.0" data-en="Smart Attendance System v1.0">Smart Attendance System v1.0</span>
+    <span class="pill-text" data-tr="Smart Attendance System v3.0.0" data-en="Smart Attendance System v3.0.0">Smart Attendance System v3.0.0</span>
   </div>
 
   <h1 class="hero-title au au-1">
@@ -1638,8 +1653,8 @@
           <span data-tr="Aktif Geliştirme" data-en="Active Development">Aktif Geliştirme</span>
         </div>
         <h3 class="pf-title">Smart Attendance System</h3>
-        <p class="pf-desc" data-tr="Yapay zeka destekli yüz tanıma ve QR kod teknolojisiyle okullar için geliştirilen akıllı yoklama sistemi. Öğrenci devamsızlıklarını saniyeler içinde tespit eder, veli bildirimleri gönderir ve detaylı raporlar sunar." data-en="Smart attendance system developed for schools using AI-powered face recognition and QR code technology. Detects student absences in seconds, sends parent notifications and provides detailed reports.">
-          Yapay zeka destekli yüz tanıma ve QR kod teknolojisiyle okullar için geliştirilen akıllı yoklama sistemi.
+        <p class="pf-desc" data-tr="Öğretmenlerin oturum başlatıp QR kod ürettiği, öğrencilerin QR tarama → yüz doğrulama → konum doğrulama adımlarını sırasıyla tamamlayarak yoklama aldığı 3 aşamalı akıllı sistem. FastAPI backend, React Native (Expo) mobil uygulama ve React.js web panelden oluşur." data-en="A 3-step smart system where teachers start sessions and generate QR codes, while students complete QR scan → face verification → GPS verification in order. Built with a FastAPI backend, React Native (Expo) mobile app, and React.js web panel.">
+          Öğretmenlerin oturum başlatıp QR kod ürettiği, öğrencilerin QR tarama → yüz doğrulama → konum doğrulama adımlarını tamamlayarak yoklama aldığı 3 aşamalı akıllı sistem.
         </p>
         <div class="pf-features">
           <div class="pf-feature">
@@ -1656,7 +1671,7 @@
           </div>
           <div class="pf-feature">
             <div class="pf-feature-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <span data-tr="Veli Bildirimleri & Raporlar" data-en="Parent Notifications & Reports">Veli Bildirimleri & Raporlar</span>
+            <span data-tr="Bildirim & İtiraz Sistemi" data-en="Notification & Dispute System">Bildirim & İtiraz Sistemi</span>
           </div>
         </div>
         <a class="hero-cta" href="#how-it-works" data-tr="Nasıl Çalışır" data-en="How It Works" style="margin:0">Nasıl Çalışır</a>
@@ -1664,23 +1679,23 @@
       <div class="pf-right">
         <div class="pf-tech-tag">
           <div class="pf-tech-tag-icon">📷</div>
-          <span>face_recognition (dlib)</span>
+          <span>InsightFace buffalo_l</span>
         </div>
         <div class="pf-tech-tag">
           <div class="pf-tech-tag-icon">📍</div>
-          <span>GPS Location API</span>
+          <span>Haversine Geofence · GPS</span>
         </div>
         <div class="pf-tech-tag">
           <div class="pf-tech-tag-icon">📱</div>
-          <span>QR Code Scanner</span>
+          <span>QR Token · OTP Flow</span>
         </div>
         <div class="pf-tech-tag">
           <div class="pf-tech-tag-icon">🔐</div>
-          <span>JWT Authentication</span>
+          <span>JWT · bcrypt · RBAC</span>
         </div>
         <div class="pf-tech-tag">
           <div class="pf-tech-tag-icon">⚡</div>
-          <span>RESTful API · 30+ endpoints</span>
+          <span>FastAPI · 13 API Modülü</span>
         </div>
       </div>
     </div>
@@ -1699,28 +1714,28 @@
     <div class="steps-grid">
       <div class="step-card">
         <div class="step-num">01</div>
-        <div class="step-title" data-tr="Derse Giriş" data-en="Enter Class">Derse Giriş</div>
-        <div class="step-desc" data-tr="Öğrenci sınıfa girer ve uygulamayı açar." data-en="Student enters classroom and opens the app.">Öğrenci sınıfa girer ve uygulamayı açar.</div>
+        <div class="step-title" data-tr="Oturum Başlat" data-en="Start Session">Oturum Başlat</div>
+        <div class="step-desc" data-tr="Öğretmen uygulamadan yoklama oturumu başlatır; sistem otomatik QR token üretir." data-en="Instructor starts an attendance session from the app; system automatically generates a QR token.">Öğretmen uygulamadan yoklama oturumu başlatır; sistem otomatik QR token üretir.</div>
       </div>
       <div class="step-card">
         <div class="step-num">02</div>
-        <div class="step-title" data-tr="GPS Doğrulama" data-en="GPS Verify">GPS Doğrulama</div>
-        <div class="step-desc" data-tr="Konum sınıf içinde mi, sistem otomatik kontrol eder." data-en="System auto-checks if location is inside classroom.">Konum sınıf içinde mi, sistem otomatik kontrol eder.</div>
+        <div class="step-title" data-tr="QR Tarama" data-en="QR Scan">QR Tarama</div>
+        <div class="step-desc" data-tr="Öğrenci mobil uygulamayla QR kodu tarar. Backend token geçerliliğini ve süresini doğrular." data-en="Student scans the QR code with the mobile app. Backend verifies token validity and expiry.">Öğrenci mobil uygulamayla QR kodu tarar. Backend token geçerliliğini ve süresini doğrular.</div>
       </div>
       <div class="step-card">
         <div class="step-num">03</div>
-        <div class="step-title" data-tr="Yüz Tanıma" data-en="Face Recognition">Yüz Tanıma</div>
-        <div class="step-desc" data-tr="AI ile saniyeler içinde kimlik teyidi yapılır." data-en="AI verifies identity within seconds.">AI ile saniyeler içinde kimlik teyidi yapılır.</div>
+        <div class="step-title" data-tr="Yüz Doğrulama" data-en="Face Verification">Yüz Doğrulama</div>
+        <div class="step-desc" data-tr="İki kare görsel InsightFace motoruna gönderilir; embedding karşılaştırması ve pasif canlılık kontrolü yapılır." data-en="Two video frames are sent to the InsightFace engine for embedding comparison and passive liveness check.">İki kare görsel InsightFace motoruna gönderilir; embedding karşılaştırması ve pasif canlılık kontrolü yapılır.</div>
       </div>
       <div class="step-card">
         <div class="step-num">04</div>
-        <div class="step-title" data-tr="QR Tarama" data-en="QR Scan">QR Tarama</div>
-        <div class="step-desc" data-tr="Eğitmenin ekrandaki QR kodu okutulur." data-en="Instructor's on-screen QR code is scanned.">Eğitmenin ekrandaki QR kodu okutulur.</div>
+        <div class="step-title" data-tr="GPS Doğrulama" data-en="GPS Verification">GPS Doğrulama</div>
+        <div class="step-desc" data-tr="Öğrencinin konumu Haversine formülüyle hesaplanır; sınıf yarıçapı içinde mi kontrol edilir." data-en="Student's location is calculated with the Haversine formula; system checks if they're within the classroom radius.">Öğrencinin konumu Haversine formülüyle hesaplanır; sınıf yarıçapı içinde mi kontrol edilir.</div>
       </div>
       <div class="step-card">
         <div class="step-num">05</div>
-        <div class="step-title" data-tr="Yoklama Alındı" data-en="Attendance Taken">Yoklama Alındı</div>
-        <div class="step-desc" data-tr="Otomatik kayıt ve veliye bildirim gönderilir." data-en="Auto-saved and parent notification sent.">Otomatik kayıt ve veliye bildirim gönderilir.</div>
+        <div class="step-title" data-tr="Yoklama Onaylandı" data-en="Attendance Confirmed">Yoklama Onaylandı</div>
+        <div class="step-desc" data-tr="3 adım tamamlandı; FinalAttendanceRecord oluşturulur ve öğrenciye anlık bildirim gönderilir." data-en="All 3 steps complete; FinalAttendanceRecord is created and an instant notification is sent to the student.">3 adım tamamlandı; FinalAttendanceRecord oluşturulur ve öğrenciye anlık bildirim gönderilir.</div>
       </div>
     </div>
   </div>
@@ -1738,17 +1753,17 @@
       <div class="arch-card">
         <div class="arch-icon">📱</div>
         <div class="arch-title" data-tr="Mobil Uygulama" data-en="Mobile App">Mobil Uygulama</div>
-        <div class="arch-desc" data-tr="iOS & Android için cross-platform uygulama. Yüz tanıma, QR tarama ve GPS doğrulama modülleri." data-en="Cross-platform app for iOS & Android. Face recognition, QR scanning and GPS verification modules.">iOS & Android için cross-platform uygulama. Yüz tanıma, QR tarama ve GPS doğrulama modülleri.</div>
+        <div class="arch-desc" data-tr="React Native (Expo) ile iOS & Android cross-platform uygulama. QR tarama, yüz doğrulama, GPS ve bildirim modülleri. Port 8081." data-en="React Native (Expo) cross-platform app for iOS & Android. QR scanning, face verification, GPS and notification modules. Port 8081.">React Native (Expo) · iOS & Android · QR tarama, yüz doğrulama, GPS ve bildirim modülleri.</div>
       </div>
       <div class="arch-card">
         <div class="arch-icon">🌐</div>
-        <div class="arch-title" data-tr="Web Admin Paneli" data-en="Web Admin Panel">Web Admin Paneli</div>
-        <div class="arch-desc" data-tr="Okul yöneticileri ve öğretmenler için web tabanlı kontrol paneli. Raporlar, kullanıcı yönetimi ve istatistikler." data-en="Web-based control panel for school admins and teachers. Reports, user management and statistics.">Okul yöneticileri ve öğretmenler için web tabanlı kontrol paneli.</div>
+        <div class="arch-title" data-tr="Web Panel" data-en="Web Panel">Web Panel</div>
+        <div class="arch-desc" data-tr="React.js (CRA) ile admin ve öğretmen arayüzü. Mazeret yönetimi, bildirim zili, yoklama kayıtları ve itiraz modülleri. Port 3000." data-en="React.js (CRA) admin and instructor interface. Excuse management, notification bell, attendance records and dispute modules. Port 3000.">React.js (CRA) · Admin & öğretmen paneli · Mazeret, itiraz ve bildirim modülleri. Port 3000.</div>
       </div>
       <div class="arch-card">
         <div class="arch-icon">⚡</div>
         <div class="arch-title" data-tr="Backend & API" data-en="Backend & API">Backend & API</div>
-        <div class="arch-desc" data-tr="RESTful API mimarisi, JWT kimlik doğrulama ve rol bazlı erişim kontrolü. 30+ endpoint." data-en="RESTful API architecture, JWT authentication and role-based access control. 30+ endpoints.">RESTful API mimarisi, JWT kimlik doğrulama ve rol bazlı erişim kontrolü.</div>
+        <div class="arch-desc" data-tr="FastAPI + SQLAlchemy · 13 API modülü · JWT + bcrypt kimlik doğrulama · RBAC · Alembic migration · SQLite (dev) / PostgreSQL (prod). Port 8000." data-en="FastAPI + SQLAlchemy · 13 API modules · JWT + bcrypt auth · RBAC · Alembic migration · SQLite (dev) / PostgreSQL (prod). Port 8000.">FastAPI + SQLAlchemy · 13 API modülü · JWT + RBAC · Alembic · SQLite (dev) / PostgreSQL (prod). Port 8000.</div>
       </div>
     </div>
   </div>
@@ -1811,14 +1826,14 @@
         <p data-tr="Hızlı geliştirme, kolay bakım ve ölçeklenebilir altyapı için sektör standardı araçlar." data-en="Industry-standard tools for fast development, easy maintenance and scalable infrastructure.">Hızlı geliştirme, kolay bakım ve ölçeklenebilir altyapı için sektör standardı araçlar.</p>
       </div>
       <div class="tech-grid">
-        <div class="tech-item"><span class="tech-item-icon">⚛️</span><span>React Native</span></div>
-        <div class="tech-item"><span class="tech-item-icon">▲</span><span>Next.js</span></div>
-        <div class="tech-item"><span class="tech-item-icon">🐍</span><span>Python · Django</span></div>
-        <div class="tech-item"><span class="tech-item-icon">🟢</span><span>Node.js</span></div>
-        <div class="tech-item"><span class="tech-item-icon">🐘</span><span>PostgreSQL</span></div>
-        <div class="tech-item"><span class="tech-item-icon">🐳</span><span>Docker</span></div>
-        <div class="tech-item"><span class="tech-item-icon">☁️</span><span>AWS · Vercel</span></div>
-        <div class="tech-item"><span class="tech-item-icon">🔒</span><span>JWT · OAuth 2.0</span></div>
+        <div class="tech-item"><span class="tech-item-icon">⚛️</span><span>React Native (Expo)</span></div>
+        <div class="tech-item"><span class="tech-item-icon">🌐</span><span>React.js (CRA)</span></div>
+        <div class="tech-item"><span class="tech-item-icon">🐍</span><span>Python · FastAPI</span></div>
+        <div class="tech-item"><span class="tech-item-icon">🗄️</span><span>SQLAlchemy · Alembic</span></div>
+        <div class="tech-item"><span class="tech-item-icon">🐘</span><span>PostgreSQL · SQLite</span></div>
+        <div class="tech-item"><span class="tech-item-icon">🐳</span><span>Docker · Docker Compose</span></div>
+        <div class="tech-item"><span class="tech-item-icon">🤖</span><span>InsightFace · Fernet</span></div>
+        <div class="tech-item"><span class="tech-item-icon">🔒</span><span>JWT · bcrypt · RBAC</span></div>
       </div>
     </div>
   </div>
@@ -1828,31 +1843,35 @@
 <section class="coming-section reveal" id="coming">
   <div class="coming-inner">
     <div class="section-head-center" style="text-align:center;margin-bottom:56px">
-      <span class="section-tag" data-tr="Yakında" data-en="Coming Soon">Yakında</span>
+      <span class="section-tag" data-tr="Yakında" data-en="Coming Soon">Aktif Olarak Geliştirdiğimiz Diğer Projeler</span>
       <h2 class="section-title">
-        <span data-tr="Hayalini Kurduğumuz" data-en="Projects We're Dreaming of,">Hayalini Kurduğumuz</span>
-        <span class="serif-italic" data-tr="Projeler." data-en="Building Soon.">Projeler.</span>
+        <span data-tr="Diğer" data-en="Our Other">Diğer</span>
+        <span class="serif-italic" data-tr="Projelerimiz." data-en="Projects.">Projelerimiz.</span>
       </h2>
-      <p class="section-sub" style="margin:0 auto" data-tr="Smart Attendance ilk adımımız. Ürün ailemize katılacak yeni projeler için takipte kalın." data-en="Smart Attendance is our first step. Stay tuned for new projects joining our product family.">Smart Attendance ilk adımımız. Ürün ailemize katılacak yeni projeler için takipte kalın.</p>
+      <p class="section-sub" style="margin:0 auto" data-tr="Projelerimizin detaylarını landing page'ler üzerinden inceleyebilirsiniz." data-en="You can explore our project details via dedicated landing pages.">Projelerimizin detaylarını landing page'ler üzerinden inceleyebilirsiniz.</p>
     </div>
 
     <div class="coming-grid">
-      <div class="coming-card">
-        <div class="coming-icon">🛡️</div>
-        <div class="coming-title">SIBling Shield</div>
-        <p class="coming-desc" data-tr="Küçük ve orta ölçekli işletmeler için entegre siber güvenlik platformu. Tehdit izleme, güvenlik denetimi ve otomatik müdahale tek panelde." data-en="Integrated cybersecurity platform for small and mid-sized businesses. Threat monitoring, audit and auto-response in one panel.">
-          Küçük ve orta ölçekli işletmeler için entegre siber güvenlik platformu.
-        </p>
-        <div class="coming-meta">2026 · Q3</div>
-      </div>
-      <div class="coming-card">
-        <div class="coming-icon">⚙️</div>
-        <div class="coming-title">SIBling Flow</div>
-        <p class="coming-desc" data-tr="İş akışlarını otomatikleştiren no-code platform. RPA + akıllı tetikleyiciler + entegrasyon hub'ı tek arayüzde." data-en="No-code platform that automates workflows. RPA + smart triggers + integration hub in one interface.">
-          İş akışlarını otomatikleştiren no-code platform. RPA, akıllı tetikleyiciler ve entegrasyon hub'ı.
-        </p>
-        <div class="coming-meta">2026 · Q4</div>
-      </div>
+      <a class="coming-link" href="landing_pages/DOKUMAN.html">
+        <div class="coming-card">
+          <div class="coming-icon">📅</div>
+          <div class="coming-title">SIBling Booking</div>
+          <p class="coming-desc" data-tr="Berber, oto yıkama, klinik ve randevu ile çalışan tüm işletmeler için çok kanallı randevu otomasyon platformu." data-en="A multi-channel booking automation platform for barbers, car wash services, clinics, and all appointment-based businesses.">
+            Berber, oto yıkama, klinik ve randevu ile çalışan tüm işletmeler için çok kanallı randevu otomasyon platformu.
+          </p>
+          <div class="coming-meta" data-tr="Proje Detaylarını Gör" data-en="View Project Details">Proje Detaylarını Gör</div>
+        </div>
+      </a>
+      <a class="coming-link" href="landing_pages/DOKUMAN2.html">
+        <div class="coming-card">
+          <div class="coming-icon">🏨</div>
+          <div class="coming-title">SIBling Hotel Management</div>
+          <p class="coming-desc" data-tr="Otellere özel masaüstü yönetim yazılımı. Gerçek zamanlı oda takibi, muhasebe, çoklu döviz, Telegram botu ve AI entegrasyonu tek platformda." data-en="Desktop management software built for hotels. Real-time room tracking, accounting, multi-currency, Telegram bot and AI integration in one platform.">
+            Otellere özel masaüstü yönetim yazılımı. Gerçek zamanlı oda takibi, muhasebe, çoklu döviz, Telegram botu ve AI entegrasyonu tek platformda.
+          </p>
+          <div class="coming-meta" data-tr="Proje Detaylarını Gör" data-en="View Project Details">Proje Detaylarını Gör</div>
+        </div>
+      </a>
       <div class="coming-card">
         <div class="coming-icon">🌐</div>
         <div class="coming-title">SIBling Web</div>
