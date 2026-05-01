@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIBling Booking - Proje Landing Page</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a; --surface: #111; --surface2: #161616; --text: #fff; --muted: #b4b4b4;
+      --border: rgba(165,180,252,.18); --accent: #a5b4fc; --grad: linear-gradient(135deg,#a5b4fc,#67e8f9);
+    }
+    body { font-family: Inter,"Segoe UI",sans-serif; background: radial-gradient(circle at top, rgba(165,180,252,.1), transparent 45%), var(--bg); color: var(--text); line-height: 1.7; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+    .topbar { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(14px); background: rgba(10,10,10,.75); border-bottom: 1px solid rgba(255,255,255,.06); }
+    .topbar-inner { min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .brand { font-weight: 700; letter-spacing: -.02em; }
+    .brand span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .topbar-right { display: flex; align-items: center; gap: 8px; }
+    .lang-toggle { display: inline-flex; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 999px; padding: 2px; gap: 2px; }
+    .lang-btn { padding: 6px 10px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font-size: 12px; font-weight: 600; cursor: pointer; }
+    .lang-btn.active { color: #0a0a0a; background: #fff; }
+    .back-link { color: var(--text); text-decoration: none; border: 1px solid rgba(255,255,255,.16); border-radius: 999px; padding: 8px 14px; font-size: 14px; }
+
+    .hero { padding: 76px 0 48px; text-align: center; }
+    .tag { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(165,180,252,.35); border-radius: 999px; padding: 6px 12px; margin-bottom: 16px; background: rgba(165,180,252,.1); }
+    h1 { font-size: clamp(34px, 6vw, 56px); line-height: 1.05; letter-spacing: -.04em; margin-bottom: 14px; }
+    .hero p { max-width: 760px; margin: 0 auto; color: var(--muted); }
+    .hero-actions { margin-top: 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+    .grid { display: grid; gap: 16px; grid-template-columns: repeat(3,minmax(0,1fr)); margin-bottom: 30px; }
+    .card,.section,.step,.mini-card,.meta-item { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; }
+    .card { padding: 22px; }
+    .kpi { font-size: 28px; font-weight: 700; letter-spacing: -.03em; margin-bottom: 4px; }
+    .kpi-sub { color: var(--muted); font-size: 13px; }
+    .section { margin-bottom: 16px; padding: 24px; }
+    .section h2 { font-size: 22px; letter-spacing: -.02em; margin-bottom: 14px; }
+    .section p,.section li { color: var(--muted); }
+    ul { padding-left: 20px; } li { margin-bottom: 8px; }
+    .problem-solution,.meta-grid { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+    .mini-card,.meta-item,.step { background: var(--surface2); border-color: rgba(255,255,255,.08); padding: 14px; }
+    .mini-card h3 { font-size: 14px; margin-bottom: 6px; color: #fff; }
+    .steps { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; }
+    .step b { display: inline-block; margin-bottom: 8px; font-size: 12px; color: var(--accent); letter-spacing: .06em; }
+    .meta-item strong { display: block; font-size: 12px; color: var(--accent); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
+    .code { background: #0d0d0d; border: 1px solid rgba(255,255,255,.1); border-radius: 10px; padding: 12px 14px; color: #d8d8d8; font-family: Consolas,"Courier New",monospace; font-size: 13px; overflow-x: auto; }
+    .cta { margin-top: 12px; display: inline-flex; text-decoration: none; color: #0a0a0a; background: #fff; border-radius: 999px; padding: 12px 20px; font-weight: 600; font-size: 14px; }
+    .cta.ghost { color: #fff; background: transparent; border: 1px solid rgba(255,255,255,.18); }
+    footer { text-align: center; color: #8f8f8f; padding: 26px 0 36px; font-size: 13px; }
+    @media (max-width:900px){ .grid,.problem-solution,.meta-grid{grid-template-columns:1fr;} .steps{grid-template-columns:1fr 1fr;} .topbar-inner{padding:10px 0;} .topbar-right{flex-wrap:wrap;justify-content:flex-end;} }
+    @media (max-width:640px){ .steps{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">SIBling <span>Software</span></div>
+      <div class="topbar-right">
+        <div class="lang-toggle">
+          <button class="lang-btn active" id="lang-tr" onclick="setLang('tr')">TR</button>
+          <button class="lang-btn" id="lang-en" onclick="setLang('en')">EN</button>
+        </div>
+        <a class="back-link" href="../index.html" data-tr="Ana Sayfaya Don" data-en="Back to Homepage">Ana Sayfaya Don</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="tag" data-tr="Sektorler Arasi Randevu Platformu" data-en="Cross-Industry Booking Platform">Sektorler Arasi Randevu Platformu</span>
+      <h1>SIBling Booking</h1>
+      <p data-tr="SIBling Booking; berberden araba yikama servisine, klinikten guzellik merkezine kadar randevu ile calisan tum isletmeler icin sureci otomatiklestirir." data-en="SIBling Booking automates appointment operations for all appointment-based businesses, from barbers and car wash services to clinics and beauty centers.">SIBling Booking; berberden araba yikama servisine, klinikten guzellik merkezine kadar randevu ile calisan tum isletmeler icin sureci otomatiklestirir.</p>
+      <div class="hero-actions">
+        <a class="cta" href="#iletisim" data-tr="Demo Talep Et" data-en="Request a Demo">Demo Talep Et</a>
+        <a class="cta ghost" href="../index.html#coming" data-tr="Diger Projeler" data-en="Other Projects">Diger Projeler</a>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card"><div class="kpi">%70</div><div class="kpi-sub" data-tr="Daha az manuel mesaj trafigi" data-en="Less manual message traffic">Daha az manuel mesaj trafigi</div></article>
+      <article class="card"><div class="kpi">7/24</div><div class="kpi-sub" data-tr="Randevu toplama kapasitesi" data-en="Appointment capture capacity">Randevu toplama kapasitesi</div></article>
+      <article class="card"><div class="kpi">2 Dil</div><div class="kpi-sub" data-tr="Turkce ve Ingilizce kullanici akisi" data-en="Turkish and English user flow">Turkce ve Ingilizce kullanici akisi</div></article>
+    </section>
+
+    <section class="section">
+      <h2 data-tr="Neden SIBling Booking?" data-en="Why SIBling Booking?">Neden SIBling Booking?</h2>
+      <div class="problem-solution">
+        <div class="mini-card"><h3 data-tr="Problem" data-en="Problem">Problem</h3><p data-tr="Telefonla randevu alma sureci yogunda aksiyor, mesajlar kayboluyor, musteriler geri donus beklerken rakibe gidiyor." data-en="Phone-based booking breaks under peak load, messages get lost, and customers switch to competitors while waiting for a reply.">Telefonla randevu alma sureci yogunda aksiyor, mesajlar kayboluyor, musteriler geri donus beklerken rakibe gidiyor.</p></div>
+        <div class="mini-card"><h3 data-tr="Cozum" data-en="Solution">Cozum</h3><p data-tr="Platform, musteriyi birkac adimda uygun saate yonlendirip randevuyu otomatik kaydeder; isletme tarafinda duzenli bir akis olusturur." data-en="The platform guides customers to available slots in a few steps, auto-saves appointments, and creates an organized workflow for the business.">Platform, musteriyi birkac adimda uygun saate yonlendirip randevuyu otomatik kaydeder; isletme tarafinda duzenli bir akis olusturur.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 data-tr="Musteri Icin Deneyim" data-en="Customer Experience">Musteri Icin Deneyim</h2>
+      <div class="steps">
+        <div class="step"><b data-tr="01 - Baslat" data-en="01 - Start">01 - Baslat</b><p data-tr="Musteri Telegram veya WhatsApp uzerinden akisi baslatir." data-en="The customer starts the flow through Telegram or WhatsApp.">Musteri Telegram veya WhatsApp uzerinden akisi baslatir.</p></div>
+        <div class="step"><b data-tr="02 - Secim" data-en="02 - Selection">02 - Secim</b><p data-tr="Hizmet, personel, tarih ve saat adimlari net sekilde ilerler." data-en="Service, staff, date, and time selections progress in a clear flow.">Hizmet, personel, tarih ve saat adimlari net sekilde ilerler.</p></div>
+        <div class="step"><b data-tr="03 - Onay" data-en="03 - Confirmation">03 - Onay</b><p data-tr="Randevu bilgisi musteriye aninda onay mesaji olarak gider." data-en="Appointment details are instantly sent to the customer as confirmation.">Randevu bilgisi musteriye aninda onay mesaji olarak gider.</p></div>
+        <div class="step"><b data-tr="04 - Yonetim" data-en="04 - Management">04 - Yonetim</b><p data-tr="Gerekirse /randevularim uzerinden kolay iptal yapilir." data-en="If needed, appointments can be canceled easily via /randevularim.">Gerekirse /randevularim uzerinden kolay iptal yapilir.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 data-tr="Isletmeye Sagladigi Faydalar" data-en="Business Benefits">Isletmeye Sagladigi Faydalar</h2>
+      <ul>
+        <li data-tr="Yogun saatlerde personelin telefona ayirdigi zamani azaltir." data-en="Reduces the time staff spend on phone calls during peak hours.">Yogun saatlerde personelin telefona ayirdigi zamani azaltir.</li>
+        <li data-tr="Randevu kayitlarini tek formatta toplar, takip kolaylasir." data-en="Collects appointments in a single format, making follow-up easier.">Randevu kayitlarini tek formatta toplar, takip kolaylasir.</li>
+        <li data-tr="Bos saatleri gorunur hale getirerek doluluk oranini artirir." data-en="Improves occupancy by making empty slots visible and bookable.">Bos saatleri gorunur hale getirerek doluluk oranini artirir.</li>
+        <li data-tr="Iptal/yeniden planlama sureclerini musteriye birakir, hiz kazandirir." data-en="Speeds operations by letting customers manage cancellations/rescheduling.">Iptal/yeniden planlama sureclerini musteriye birakir, hiz kazandirir.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2 data-tr="Kime Uygun?" data-en="Who Is It For?">Kime Uygun?</h2>
+      <ul>
+        <li data-tr="Berber, kuafor, guzellik merkezi, araba yikama, oto servis gibi randevu odakli isletmeler." data-en="Appointment-based businesses such as barbers, salons, beauty centers, car wash services, and auto service shops.">Berber, kuafor, guzellik merkezi, araba yikama, oto servis gibi randevu odakli isletmeler.</li>
+        <li data-tr="Klinik, danismanlik, kurs ve atolye gibi saat bazli calisan hizmet ekipleri." data-en="Time-slot based service teams like clinics, consulting firms, courses, and workshops.">Klinik, danismanlik, kurs ve atolye gibi saat bazli calisan hizmet ekipleri.</li>
+        <li data-tr="Randevu yonetimini dijitallestirmek isteyen tek subeli veya cok subeli markalar." data-en="Single-branch or multi-branch brands that want to digitize appointment management.">Randevu yonetimini dijitallestirmek isteyen tek subeli veya cok subeli markalar.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2 data-tr="Kanal Entegrasyonlari" data-en="Channel Integrations">Kanal Entegrasyonlari</h2>
+      <ul>
+        <li data-tr="Telegram entegrasyonu hizli devreye alinabilir." data-en="Telegram integration can be deployed quickly.">Telegram entegrasyonu hizli devreye alinabilir.</li>
+        <li data-tr="WhatsApp Business API entegrasyonu ile ayni randevu akisi WhatsApp'a tasinabilir." data-en="The same booking flow can be moved to WhatsApp via WhatsApp Business API integration.">WhatsApp Business API entegrasyonu ile ayni randevu akisi WhatsApp'a tasinabilir.</li>
+        <li data-tr="Ihtiyaca gore cift kanal (Telegram + WhatsApp) paralel calistirilabilir." data-en="Dual-channel operation (Telegram + WhatsApp) can run in parallel based on your needs.">Ihtiyaca gore cift kanal (Telegram + WhatsApp) paralel calistirilabilir.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2 data-tr="Teknoloji Altyapisi" data-en="Technology Stack">Teknoloji Altyapisi</h2>
+      <ul><li>Python 3.x</li><li>aiogram 3.x</li><li>Google Sheets API (gspread)</li><li data-tr="asyncio tabanli asenkron akis" data-en="asyncio-based asynchronous flow">asyncio tabanli asenkron akis</li></ul>
+    </section>
+
+    <section class="section">
+      <h2 data-tr="Temel Ozellik Seti" data-en="Core Feature Set">Temel Ozellik Seti</h2>
+      <ul>
+        <li data-tr="FSM tabanli adim adim randevu olusturma sureci" data-en="Step-by-step booking flow powered by FSM.">FSM tabanli adim adim randevu olusturma sureci</li>
+        <li data-tr="/randevularim ile aktif randevu listeleme" data-en="List active appointments via /randevularim.">/randevularim ile aktif randevu listeleme</li>
+        <li data-tr="Tek tikla randevu iptali" data-en="One-click appointment cancellation.">Tek tikla randevu iptali</li>
+        <li data-tr="Admin icin gunluk randevu ozeti" data-en="Daily appointment summary for admins.">Admin icin gunluk randevu ozeti</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2 data-tr="Kurulum Notlari" data-en="Setup Notes">Kurulum Notlari</h2>
+      <div class="meta-grid">
+        <div class="meta-item"><strong data-tr="Gereksinimler" data-en="Requirements">Gereksinimler</strong>Python 3.x, aiogram, gspread</div>
+        <div class="meta-item"><strong data-tr="Calistirma" data-en="Run">Calistirma</strong><div class="code">python bot.py</div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 data-tr="Komutlar" data-en="Commands">Komutlar</h2>
+      <ul>
+        <li data-tr="/start - Botu baslatir ve randevu akisina yonlendirir." data-en="/start - Starts the bot and directs users into the booking flow."><span class="code">/start</span> - Botu baslatir ve randevu akisina yonlendirir.</li>
+        <li data-tr="/randevularim - Aktif randevulari listeler." data-en="/randevularim - Lists active appointments."><span class="code">/randevularim</span> - Aktif randevulari listeler.</li>
+        <li data-tr="/admin - Admin icin gunluk randevu ozetini gosterir." data-en="/admin - Shows daily booking summary for admins."><span class="code">/admin</span> - Admin icin gunluk randevu ozetini gosterir.</li>
+      </ul>
+    </section>
+
+    <section class="section" id="iletisim">
+      <h2 data-tr="SIBling Booking'i Isletmenize Uyarlayalim" data-en="Let's Adapt SIBling Booking to Your Business">SIBling Booking'i Isletmenize Uyarlayalim</h2>
+      <p data-tr="Is modelinize gore hizmet adimlarini, personel yapisini, sektor ihtiyaclarini ve Telegram/WhatsApp kanalini ozellestirerek hizli kurulum saglayabiliriz." data-en="We can customize service steps, staffing model, industry requirements, and Telegram/WhatsApp channels for a fast launch tailored to your business.">Is modelinize gore hizmet adimlarini, personel yapisini, sektor ihtiyaclarini ve Telegram/WhatsApp kanalini ozellestirerek hizli kurulum saglayabiliriz.</p>
+      <a class="cta" href="https://www.instagram.com/siblingsoftware?igsh=d3d2em52bmI2a2hl" target="_blank" rel="noopener noreferrer" data-tr="Instagram'dan Iletisime Gec" data-en="Contact Us on Instagram">Instagram'dan Iletisime Gec</a>
+      <a class="cta ghost" href="../index.html" data-tr="Ana Sayfaya Don" data-en="Back to Homepage">Ana Sayfaya Don</a>
+    </section>
+  </main>
+
+  <footer><span data-tr="SIBling Booking Landing Page - 2026 SIBling Software" data-en="SIBling Booking Landing Page - 2026 SIBling Software">SIBling Booking Landing Page - 2026 SIBling Software</span></footer>
+  <script>
+    let currentLang = localStorage.getItem('sibBookingLang') || 'tr';
+    function setLang(lang) {
+      currentLang = lang;
+      localStorage.setItem('sibBookingLang', lang);
+      document.querySelectorAll('[data-tr]').forEach((el) => {
+        const txt = lang === 'tr' ? el.dataset.tr : el.dataset.en;
+        if (txt !== undefined) el.textContent = txt;
+      });
+      document.documentElement.lang = lang;
+      document.getElementById('lang-tr').classList.toggle('active', lang === 'tr');
+      document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+    }
+    setLang(currentLang);
+  </script>
+</body>
+</html>
